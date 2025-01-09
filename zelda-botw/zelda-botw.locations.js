@@ -1,5 +1,5 @@
 /*
-	The legend of Zelda: Breath of the wild Savegame Editor (Locations) v20170802
+	The Legend of Zelda: Breath of the Wild Savegame Editor (Locations) v20170802
 
 	by captncraig 2017
 

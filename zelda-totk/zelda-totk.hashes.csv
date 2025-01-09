@@ -1,7 +1,6 @@
 # Zelda TOTK hashes
 # cracked and compiled by MacSpazzy and MrCheeze
 
-
 #Enum values
 EnumValues;ArrivalPointState.CheckPoint*;Close,Open
 EnumValues;ChallengeLogState_Challenge.*;None,New,Update

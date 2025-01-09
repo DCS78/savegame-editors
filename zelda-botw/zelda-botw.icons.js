@@ -1,5 +1,5 @@
 /*
-	The legend of Zelda: Breath of the wild Savegame Editor (Icons) v20190128
+	The Legend of Zelda: Breath of the Wild Savegame Editor (Icons) v20190128
 
 	by Marc Robledo 2017-2019
 

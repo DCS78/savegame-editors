@@ -1,5 +1,5 @@
 /*
-	The legend of Zelda: Breath of the wild Savegame Editor (Experience/score calculation) v20230708
+	The Legend of Zelda: Breath of the Wild Savegame Editor (Experience/score calculation) v20230708
 
 	by cutecryptid 2019
 

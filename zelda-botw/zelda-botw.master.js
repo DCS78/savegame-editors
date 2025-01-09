@@ -1,5 +1,5 @@
 /*
-	The legend of Zelda: Breath of the wild - Master editor v20190625
+	The Legend of Zelda: Breath of the Wild - Master Editor v20190625
 	by Marc Robledo 2017-2019
 
 	datamining by MrCheeze:
