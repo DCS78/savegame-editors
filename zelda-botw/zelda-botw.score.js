@@ -1,13 +1,12 @@
 /*
-	The Legend of Zelda: Breath of the Wild Savegame Editor (Experience/score calculation) v20230708
-
+	The Legend of Zelda: Breath of the Wild Savegame Editor (Experience/score calculation) v20250109
 	by cutecryptid 2019
 
 	based on https://www.reddit.com/r/Breath_of_the_Wild/comments/8fchiq/about_difficulty_scaling_for_enemies_and_weapons/
 */
 
-var BOTWScoreCalculator=(function(){
-	const ENEMY_POINTS={
+const BOTWScoreCalculator = (function () {
+	const ENEMY_POINTS = {
 		Defeated_Enemy_Wizzrobe_Electric_Num: 5.0,
 		Defeated_Enemy_Wizzrobe_Fire_Num: 5.0,
 		Defeated_Enemy_Wizzrobe_Ice_Num: 5.0,
@@ -60,58 +59,55 @@ var BOTWScoreCalculator=(function(){
 		Defeated_Enemy_GanonBeast_Num: 800.0
 	};
 
-	/* crc32 from https://stackoverflow.com/a/18639999 */
-	const CRC32_TABLE=(function(){
-		var c;
-		var crcTable = [];
-		for(var n =0; n < 256; n++){
-			c = n;
-			for(var k =0; k < 8; k++){
-				c = ((c&1) ? (0xEDB88320 ^ (c >>> 1)) : (c >>> 1));
+	// crc32 from https://stackoverflow.com/a/18639999
+	const CRC32_TABLE = (function () {
+		const crcTable = [];
+		for (let n = 0; n < 256; n++) {
+			let c = n;
+			for (let k = 0; k < 8; k++) {
+				c = ((c & 1) ? (0xEDB88320 ^ (c >>> 1)) : (c >>> 1));
 			}
 			crcTable[n] = c;
 		}
 		return crcTable;
-	}());
+	})();
 
-	var crc32=function(str){
-		var crc = 0 ^ (-1);
+	const crc32 = function (str) {
+		let crc = 0 ^ (-1);
 
-		for (var i = 0; i < str.length; i++ ) {
+		for (let i = 0; i < str.length; i++) {
 			crc = (crc >>> 8) ^ CRC32_TABLE[(crc ^ str.charCodeAt(i)) & 0xFF];
 		}
 
 		return (crc ^ (-1)) >>> 0;
 	};
 
-	var findHashesIn;
+	const findHashesIn = {};
 
 	return {
-		calculate:function(){
-			if(!findHashesIn){
-				findHashesIn=[];
-				Object.keys(ENEMY_POINTS).forEach(function(hashId){
-					findHashesIn[crc32(hashId)]=ENEMY_POINTS[hashId];
+		calculate: function (tempFile) {
+			if (Object.keys(findHashesIn).length === 0) {
+				Object.keys(ENEMY_POINTS).forEach(function (hashId) {
+					findHashesIn[crc32(hashId)] = ENEMY_POINTS[hashId];
 				});
 			}
 
-			var scaleScore = 0
-			var previousHashValue=0;
-			for(var i=0x0c; i<tempFile.fileSize-4; i+=8){
-				var hashValue=tempFile.readU32(i);
+			let scaleScore = 0;
+			let previousHashValue = null;
+			for (let i = 0x0c; i < tempFile.fileSize - 4; i += 8) {
+				const hashValue = tempFile.readU32(i);
 
-				if(hashValue===previousHashValue)
-					continue;
-				previousHashValue=hashValue;
+				if (hashValue === previousHashValue) continue;
+				previousHashValue = hashValue;
 
-				if(findHashesIn[hashValue]){
-					defeated = tempFile.readU32(i+4);
-					enepoints = findHashesIn[hashValue];
-					scaleScore += enepoints*defeated;
+				if (findHashesIn[hashValue]) {
+					const defeated = tempFile.readU32(i + 4);
+					const enemyPoints = findHashesIn[hashValue];
+					scaleScore += enemyPoints * defeated;
 				}
 			}
 
 			return scaleScore;
 		}
-	}
-}());
+	};
+})();
