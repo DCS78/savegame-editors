@@ -178,11 +178,6 @@
 			<div class="three columns"><select id="select-pos-map"></select></div>
 		</div>
 
-
-	
-	
-
-
 		<!-- COMPLETIONISM -->
 		<h3 class="border-blue">Completionism</h3>
 		<div class="row">
@@ -350,19 +345,14 @@
 				<option value="^Location_">Visited locations</option>
 				<option value="AlbumPicture|PictureBook">Compendium</option>
 			</select>
-			<input id="input-custom-filter" type="text" placeholder="Search hash keys" onchange="BOTWMasterEditor.refreshResults()" />
-			
-			 | <label for="select-page">Page: </label>
+			<input id="input-custom-filter" type="text" placeholder="Search hash keys" onchange="BOTWMasterEditor.refreshResults()" /> | 
+			<label for="select-page">Page: </label>
 			<button id="page-prev" onclick="BOTWMasterEditor.prevPage()">&laquo;</button>
 			<select id="select-page" class="small" onchange="BOTWMasterEditor.setPage(this.selectedIndex)"></select>
 			<button id="page-next" onclick="BOTWMasterEditor.nextPage()">&raquo;</button>
-
-
 			<table id="table"></table>
 		</div>
 	</div>	
 </div>
-
-
 </body>
 </html>

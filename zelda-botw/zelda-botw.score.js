@@ -6,7 +6,6 @@
 	based on https://www.reddit.com/r/Breath_of_the_Wild/comments/8fchiq/about_difficulty_scaling_for_enemies_and_weapons/
 */
 
-
 var BOTWScoreCalculator=(function(){
 	const ENEMY_POINTS={
 		Defeated_Enemy_Wizzrobe_Electric_Num: 5.0,
@@ -61,8 +60,6 @@ var BOTWScoreCalculator=(function(){
 		Defeated_Enemy_GanonBeast_Num: 800.0
 	};
 
-
-
 	/* crc32 from https://stackoverflow.com/a/18639999 */
 	const CRC32_TABLE=(function(){
 		var c;
@@ -86,7 +83,6 @@ var BOTWScoreCalculator=(function(){
 
 		return (crc ^ (-1)) >>> 0;
 	};
-
 
 	var findHashesIn;
 

@@ -60,7 +60,6 @@ SavegameEditor={
 		0xfda0cde4, 'RELIC_RITO'
 	],
 
-
 	/* private functions */
 	_toHexInt:function(i){var s=i.toString(16);while(s.length<8)s='0'+s;return '0x'+s},
 	_writeBoolean:function(offset,val,arrayIndex){if(arrayIndex)tempFile.writeU32(offset+8*arrayIndex,val?1:0);else tempFile.writeU32(offset,val?1:0)},
@@ -116,7 +115,6 @@ SavegameEditor={
 			}*/
 		}
 	},
-
 
 	_getItemTranslation:function(itemId){
 		for(var i=0; i<BOTW_Data.Translations.length; i++)
@@ -331,7 +329,6 @@ SavegameEditor={
 		return arr2;
 	},
 
-
 	changeEndianess:function(){
 		var tempFileByteSwapped=new MarcFile(tempFile.fileSize);
 		tempFileByteSwapped.fileType=tempFile.fileType;
@@ -361,15 +358,11 @@ SavegameEditor={
 				return true;			
 			}
 		}
-		
-		
-
 		return false
 	},
 	checkValidSavegame:function(){
 		return this._checkValidSavegameByConsole(false) || this._checkValidSavegameByConsole(true);
 	},
-
 
 	preload:function(){
 		this.selectItem=document.createElement('select');
@@ -453,7 +446,6 @@ SavegameEditor={
 			}
 		});
 
-
 		/* horses */
 		for(var i=0; i<6; i++){
 			if(i<5){
@@ -471,9 +463,7 @@ SavegameEditor={
 			select('horse'+i+'-reins', this._arrayToSelectOpts(BOTW_Data.HORSE_REINS));
 			select('horse'+i+'-type', this._arrayToSelectOpts(i===5?BOTW_Data.HORSE_TYPES.concat(BOTW_Data.HORSE_TYPES_UNTAMMED):BOTW_Data.HORSE_TYPES));
 		}
-		
-		
-		
+
 		MarcTooltips.add('.tab-button',{className:'dark',fixed:true});
 	},
 
@@ -488,7 +478,6 @@ SavegameEditor={
 	/* load function */
 	load:function(){
 		tempFile.fileName='game_data.sav';
-
 
 		/* prepare editor */
 		setValue('rupees', tempFile.readU32(this.Offsets.RUPEES));
@@ -506,7 +495,6 @@ SavegameEditor={
 		setValue('defeated-molduga', tempFile.readU32(this.Offsets.DEFEATED_MOLDUGA_COUNTER));
 		setValue('playtime',this._timeToString(tempFile.readU32(this.Offsets.PLAYTIME)));
 
-
 		/* motorcycle */
 		document.getElementById('checkbox-motorcycle').checked=!!tempFile.readU32(this.Offsets.MOTORCYCLE);
 		if(this.Offsets.MOTORCYCLE){
@@ -514,7 +502,6 @@ SavegameEditor={
 		}else{
 			document.getElementById('row-motorcycle').style.display='none';
 		}
-
 
 		/* coordinates */
 		setValue('pos-x', tempFile.readF32(this.Offsets.PLAYER_POSITION));
@@ -534,10 +521,8 @@ SavegameEditor={
 		setValue('pos-y-horse', tempFile.readF32(this.Offsets.HORSE_POSITION+8));
 		setValue('pos-z-horse', tempFile.readF32(this.Offsets.HORSE_POSITION+16));
 
-
 		/* map pins */
 		loadMapPins();
-
 
 		/* items */
 		empty('container-weapons');
@@ -577,7 +562,6 @@ SavegameEditor={
 			}else if(itemCat==='shields' && search===2){
 				modifiersArray[2]++;
 			}
-
 		}
 		MarcTooltips.add('#container-weapons input',{text:'Weapon durability',position:'bottom',align:'right'});
 		MarcTooltips.add('#container-bows input',{text:'Bow durability',position:'bottom',align:'right'});
@@ -599,7 +583,6 @@ SavegameEditor={
 			}
 		}
 
-
 		/* horses */
 		for(var i=0; i<6; i++){
 			if(i<5){
@@ -615,7 +598,6 @@ SavegameEditor={
 				get('row-horse'+i).style.visibility='hidden';
 			}
 		}
-
 
 		showTab('home');
 
@@ -640,13 +622,10 @@ SavegameEditor={
 		tempFile.writeU32(this.Offsets.DEFEATED_TALUS_COUNTER, getValue('defeated-talus'));
 		tempFile.writeU32(this.Offsets.DEFEATED_MOLDUGA_COUNTER, getValue('defeated-molduga'));
 		
-
 		/* MOTORCYCLE */
 		if(this.Offsets.MOTORCYCLE){
 			tempFile.writeU32(this.Offsets.MOTORCYCLE, getField('checkbox-motorcycle').checked?1:0);
 		}
-
-
 
 		/* COORDINATES */
 		tempFile.writeF32(this.Offsets.PLAYER_POSITION, getValue('pos-x'));
@@ -659,7 +638,6 @@ SavegameEditor={
 		tempFile.writeF32(this.Offsets.HORSE_POSITION, getValue('pos-x-horse'));
 		tempFile.writeF32(this.Offsets.HORSE_POSITION+8, getValue('pos-y-horse'));
 		tempFile.writeF32(this.Offsets.HORSE_POSITION+16, getValue('pos-z-horse'));
-
 
 		/* ITEMS */
 		for(var i=0; i<this.Constants.MAX_ITEMS; i++){
@@ -686,12 +664,8 @@ SavegameEditor={
 }
 
 
-
-
-
 /* TABS */
 var availableTabs=['home','weapons','bows','shields','clothes','materials','food','other','horses','master'];
-
 
 var currentTab;
 function showTab(newTab){
@@ -710,8 +684,6 @@ function showTab(newTab){
 			BOTWMasterEditor.loadHashes();
 	}
 }
-
-
 
 /*
 function setValueByHash(hash, val){
@@ -933,8 +905,6 @@ function dist(px,py,pz,l){
 	return Math.sqrt((Math.pow(l[0]-px,2))+(Math.pow(l[2]-pz,2)))
 }
 
-
-
 function addToMap(data, icon){
 	var px=tempFile.readF32(SavegameEditor.Offsets.PLAYER_POSITION);
 	var py=tempFile.readF32(SavegameEditor.Offsets.PLAYER_POSITION+8);
@@ -1021,7 +991,6 @@ function addLocationsToMap(){
 	MarcDialogs.alert(n+' pins for missing locations added to map');
 }
 
-
 /* MarcTooltips.js v20200216 - Marc Robledo 2014-2020 - http://www.marcrobledo.com/license */
 var MarcTooltips=function(){var n=/MSIE 8/.test(navigator.userAgent);function d(t,e,o){n?t.attachEvent("on"+e,o):t.addEventListener(e,o,!1)}function u(t){void 0!==t.stopPropagation?t.stopPropagation():t.cancelBubble=!0}function g(t){if(/^#[0-9a-zA-Z_\-]+$/.test(t))return[document.getElementById(t.replace("#",""))];var e=document.querySelectorAll(t);if(n){for(var o=[],i=0;i<e.length;i++)o.push(e[i]);return o}return Array.prototype.slice.call(e)}var h=function(t,e,o){t.className=t.className.replace(/position-\w+/,"position-"+e.position).replace(/align-\w+/,"align-"+e.align);var i=(window.pageXOffset||document.documentElement.scrollLeft)-(document.documentElement.clientLeft||0),n=(window.pageYOffset||document.documentElement.scrollTop)-(document.documentElement.clientTop||0);e.fixed&&(n=i=0);var l=t.attachedTo.getBoundingClientRect().left,a=t.attachedTo.getBoundingClientRect().top,s=t.attachedTo.offsetWidth,p=t.attachedTo.offsetHeight;if("up"===e.position?t.style.top=parseInt(a+n-t.offsetHeight)+"px":"down"===e.position?t.style.top=parseInt(a+n+p)+"px":"top"===e.align?t.style.top=parseInt(a+n)+"px":"bottom"===e.align?t.style.top=parseInt(a+n-(t.offsetHeight-p))+"px":t.style.top=parseInt(a+n-parseInt((t.offsetHeight-p)/2))+"px","up"===e.position||"down"===e.position?"left"===e.align?t.style.left=parseInt(l+i)+"px":"right"===e.align?t.style.left=parseInt(l+i-(t.offsetWidth-s))+"px":t.style.left=parseInt(l+i-parseInt((t.offsetWidth-s)/2))+"px":"left"===e.position?t.style.left=parseInt(l+i-t.offsetWidth)+"px":"right"===e.position&&(t.style.left=parseInt(l+i+s)+"px"),o){var r={position:e.position,align:e.align,fixed:e.fixed},c=parseInt(t.style.left.replace("px","")),f=parseInt(t.style.top.replace("px","")),d=c+t.offsetWidth,u=f+t.offsetHeight,g=(i=window.scrollX,n=window.scrollY,Math.max(document.documentElement.clientWidth,window.innerWidth||0)),m=Math.max(document.documentElement.clientHeight,window.innerHeight||0);"up"===e.position||"down"===e.position?(g<d?r.align="right":c<i&&(r.align="left"),f<n?r.position="down":n+m<u&&(r.position="up")):(m<u?r.align="bottom":f<n&&(r.align="top"),c<i?r.position="right":i+g<d&&(r.position="left")),h(t,r,!1)}},m={};d(window,"load",function(){d(n?document:window,"click",function(){for(key in m)/ visible$/.test(m[key].className)&&/:true:/.test(key)&&(m[key].className=m[key].className.replace(" visible",""))}),d(window,"resize",function(){for(key in m)/ visible$/.test(m[key].className)&&m[key].attachedTo&&h(m[key],m[key].tooltipInfo,!0)})});function y(t){var e=t.currentTarget||t.srcElement;e.title&&(e.setAttribute("data-tooltip",e.title),e.title=""),(e.tooltip.attachedTo=e).tooltip.innerHTML=e.getAttribute("data-tooltip"),e.tooltip.className+=" visible",h(e.tooltip,e.tooltip.tooltipInfo,!0)}function w(t){var e=t.currentTarget||t.srcElement;e.tooltip.className=e.tooltip.className.replace(" visible","")}return{add:function(t,e){var o="down",i="center",n=!1,l=!1,a=!1,s=!1,p=!1;e&&(e.position&&/^(up|down|left|right)$/i.test(e.position)&&(o=e.position.toLowerCase()),e.align&&/^(top|bottom|left|right)$/i.test(e.align)&&(("up"!==o&&"down"!==o||"left"!==e.align&&"right"!==e.align)&&("left"!==o&&"right"!==o||"top"!==e.align&&"bottom"!==e.align)||(i=e.align.toLowerCase())),l=e.clickable||e.onClick||e.onclick||!1,a=e.focusable||e.onFocus||e.onfocus||!1,s=e.fixed||e.positionFixed||!1,n=e.class||e.className||e.customClass||e.customClassName||!1,p=e.text||e.customText||!1);for(var r=function(t){if("string"==typeof t)return g(t);if(t.length){for(var e=[],o=0;o<t.length;o++)"string"==typeof t[o]?e=e.concat(g(t[o])):e.push(t[o]);return e}return[t]}(t),c=function(t,e,o,i,n){var l=t+":"+e+":"+o+":"+i;if(m[l])return m[l];var a=document.createElement("div");return a.className="tooltip position-"+t+" align-"+e,a.className+="left"===t||"right"===t?" position-horizontal":" position-vertical",i&&(a.className+=" "+i),a.style.position=n?"fixed":"absolute",a.style.zIndex="9000",a.style.top="0",a.style.left="0",a.attachedTo=null,a.tooltipInfo={position:t,align:e,fixed:n},o&&d(a,"click",u),m[l]=a,document.body.appendChild(a),a}(o,i,l||a,n,s),f=0;f<r.length;f++)p?r[f].setAttribute("data-tooltip",p):r[f].title&&r[f].setAttribute("data-tooltip",r[f].title),r[f].title="",r[f].tooltip=c,a?(d(r[f],"focus",y),d(r[f],"blur",w),d(r[f],"click",u)):l?(d(r[f],"click",y),d(r[f],"click",u)):(d(r[f],"mouseover",y),d(r[f],"mouseout",w))}}}();
 
@@ -1047,15 +1016,6 @@ if(typeof String.prototype.startsWith==='undefined'){
         return (new RegExp('^'+search)).test(this)
     };
 }
-
-
-
-
-
-
-
-
-
 
 var masterModeLoaded=false;
 function loadMasterMode(){

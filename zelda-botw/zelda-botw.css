@@ -4,7 +4,6 @@
 /* @FONT-FACES */
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700,800');
 
-
 body{
 	font:15px 'Open Sans',sans-serif;
 	cursor:default;
@@ -23,8 +22,6 @@ table{
 tr{border-bottom:1px solid #452e2e;height:36px}
 tr:last-child{border-bottom:none}
 tr:hover{background-color:#250e0e}
-
-
 
 /* flex box */
 .row{
@@ -176,17 +173,6 @@ i.tab-icon.other{background-position-x:-224px;}
 i.tab-icon.horses{background-position-x:-256px;}
 i.tab-icon.master{background-position-x:-288px;}
 
-
-
-
-
-
-
-
-
-
-
-
 /* header+toolbar+footer */
 #header{
 	color:#333;
@@ -214,8 +200,6 @@ i.tab-icon.master{background-position-x:-288px;}
 #span-version:hover{text-decoration:underline}
 #header h1{display:none}
 #header h1 img{vertical-align:middle}
-
-
 
 .header-buttons{
 	font-size:85%
@@ -254,9 +238,6 @@ i.tab-icon.master{background-position-x:-288px;}
 	100%{box-shadow:none}
 }
 
-
-
-
 hr{border:none;border-top:1px dotted #bbb;margin:15px 0}
 h3{
 	border-bottom:2px solid #888;
@@ -269,9 +250,6 @@ h3{
 table{width:100%}
 /*tbody tr:nth-child(even){background-color:#f2f2f2}*/
 th{background-color:#d4d4d4}
-
-
-
 
 /* forms */
 input[type=text],input[type=number],select{
@@ -313,10 +291,6 @@ optgroup{background-color:black}
 	background-color:#222;
 	border-color:#b99f65
 }
-
-
-
-
 
 /* buttons */
 button{
@@ -444,7 +418,6 @@ button.colored.orange:active{
 	text-shadow:0 -1px 0 #654e0e !important
 }
 
-
 button.transparent{
 	min-width:auto;
 	box-shadow:none;
@@ -458,23 +431,10 @@ button.transparent{
 button.transparent:hover{background-color:rgba(0,0,0,.05)}
 button.no-text.with-icon:before{margin-right:0px}
 
-
-
-
-
-
-
-
-
-
-
-
-
 .wrapper{
 	max-width:920px;
 	margin:0 auto
 }
-
 
 .external-link-help{
 	background-color:#f9f5da;
@@ -488,10 +448,6 @@ button.no-text.with-icon:before{margin-right:0px}
 .external-link-help:hover{
 	background-color:white;
 }
-
-
-
-
 
 /* MarcDragAndDrop */
 #dragzone{
@@ -547,11 +503,6 @@ button.no-text.with-icon:before{margin-right:0px}
 	font-weight:bold
 }
 
-
-
-
-
-
 /* responsive */
 @media only screen and (max-width:961px){
 	.wrapper{max-width:auto; padding-left:10px;padding-right:10px;}
@@ -564,15 +515,8 @@ button.no-text.with-icon:before{margin-right:0px}
 	#the-editor{font-size:12px}
 }
 
-
-
-
-
-
 /* MarcDialogs */
 #dialog-about{background-color:#ffd823}
-
-
 
 .dialog-overlay,.dialog{visibility:hidden;opacity:0}
 .dialog-overlay.active,.dialog.active{visibility:visible;opacity:1;transition-delay:0s}/* fixes fade-in/fade-out*/

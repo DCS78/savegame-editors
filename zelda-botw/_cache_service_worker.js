@@ -13,7 +13,6 @@
 	navigator.serviceWorker.register('/repo/_cache_service_worker.js', {scope: '/repo/'})
 */
 
-
 /* MOD: fix old caches for mrc */
 caches.keys().then(function(cacheNames){
 	for(var i=0; i<cacheNames.length; i++){
@@ -50,8 +49,6 @@ var PRECACHE_URLS=[
 	'/savegame-editors/savegame-editor.js'
 ];
 
-
-
 // install event (fired when sw is first installed): opens a new cache
 self.addEventListener('install', evt => {
 	evt.waitUntil(
@@ -60,7 +57,6 @@ self.addEventListener('install', evt => {
 			.then(self.skipWaiting())
 	);
 });
-
 
 // activate event (fired when sw is has been successfully installed): cleans up old outdated caches
 self.addEventListener('activate', evt => {
@@ -75,7 +71,6 @@ self.addEventListener('activate', evt => {
 		}).then(() => self.clients.claim())
 	);
 });
-
 
 // fetch event (fired when requesting a resource): returns cached resource when possible
 self.addEventListener('fetch', evt => {

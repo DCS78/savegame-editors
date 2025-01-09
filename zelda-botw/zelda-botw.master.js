@@ -25,13 +25,6 @@ const STRING64_ARRAY=16;
 const STRING256=17;
 const STRING256_ARRAY=18;
 
-
-
-
-
-
-
-
 function addEditorRow(container, left, right){
 	var tr=document.createElement('tr');
 	tr.appendChild(document.createElement('td'));
@@ -117,9 +110,6 @@ function createHashInput(container, hashId, type, offset){
 		addEditorRow(container, hashId+' (unknown)');
 	}
 }
-
-
-
 
 function setBoolean(){
 	SavegameEditor._writeBoolean(this.offset, this.checked, 0);
